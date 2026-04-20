@@ -1,0 +1,15 @@
+# Obsidian
+.obsidian/
+
+# Wiki queries (ephemeral, personal)
+wiki/queries/
+wiki/concepts/*
+wiki/entities/*
+wiki/summaries/*
+wiki/index.md
+wiki/log.md
+raw/*
+
+# macOS
+.DS_Store
+**/.DS_Store
