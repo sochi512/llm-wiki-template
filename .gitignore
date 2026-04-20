@@ -1,13 +1,14 @@
 # Obsidian
 .obsidian/
 
-# Wiki queries (ephemeral, personal)
-wiki/queries/
+# Wiki content (user-generated)
+wiki/queries/*
 wiki/concepts/*
 wiki/entities/*
 wiki/summaries/*
 wiki/index.md
 wiki/log.md
+!wiki/**/.gitkeep
 raw/*
 
 # macOS
