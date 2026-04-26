@@ -15,7 +15,7 @@ Claude Codeを使って、LLMが継続的に維持する知識ベースをObsidi
    ```
    /wiki-init
    ```
-4. `raw/` にソースファイルを追加してインジェストする：
+4. `raw/` にソースファイルを追加して取り込む：
    ```
    /wiki-ingest raw/your-article.md
    ```
@@ -25,9 +25,9 @@ Claude Codeを使って、LLMが継続的に維持する知識ベースをObsidi
 | コマンド | 使い方 | 説明 |
 |---------|-------|-------------|
 | `/wiki-init` | `/wiki-init` | wikiのフォルダ構造をセットアップ |
-| `/wiki-ingest` | `/wiki-ingest raw/article.md` | ソースファイルをインジェスト。引数を省略すると `raw/` 内の未処理ファイルをすべてインジェスト |
-| `/wiki-query` | `/wiki-query RAGとは何か？` | wikiに質問して回答を保存 |
-| `/wiki-lint` | `/wiki-lint` | ヘルスチェック — 矛盾・孤立ページ・リンク切れを検出 |
+| `/wiki-ingest` | `/wiki-ingest raw/article.md` | ソースファイルを取り込む。引数を省略すると `raw/` 内の未処理ファイルをすべて取り込む |
+| `/wiki-query` | `/wiki-query RAGとは何か？` | wikiに質問して回答を保存。コマンドなしで普通に質問しても自動でwikiを参照する |
+| `/wiki-lint` | `/wiki-lint` | 点検 — 矛盾・孤立ページ・リンク切れを検出 |
 
 ## 構造
 
@@ -41,7 +41,7 @@ Vault/
 │   ├── summaries/         記事ごとのまとめページ
 │   ├── concepts/          用語・概念ページ
 │   ├── entities/          固有名詞ページ（人物・ツール・企業など）
-│   └── queries/           クエリ結果の保存ページ（デフォルトでgitignore）
+│   └── queries/           質問・回答の保存ページ（デフォルトでgitignore）
 └── .claude/commands/      スラッシュコマンド定義
 ```
 
