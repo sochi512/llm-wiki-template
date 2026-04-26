@@ -1,5 +1,7 @@
 # Obsidian
 .obsidian/
+specs/
+wip.md
 
 # Wiki content (user-generated)
 wiki/queries/*
