@@ -133,15 +133,17 @@ LLM 内部で以下を一括決定する：
 - 各 entity ページを新規作成または追記
 
 **必ずraw/ソースファイルを直接参照して書くこと。summaryから派生させない。**  
+**concept/entityページの `## ソース` 欄には、フェーズ1で読み込んだrawファイルのbasename（拡張子なし）を書くこと。同フェーズで作成したsummaryのスラッグを書いてはいけない。**  
 既存ページの内容と矛盾する場合は矛盾を明記する。
 
 #### フェーズ4 — 逐次更新
 
 書き込み内容が確定してから順に実行する：
 
-1. `wiki/index.md` を更新
-2. 各フェーズで発行した tool call のラウンド数を集計する（P1〜P4それぞれ）
-3. `wiki/log.md` に追記：`## [YYYY-MM-DD] ingest | [ソースタイトル] | Nrounds (P1:N P2:0 P3:N P4:N)`
+1. `wiki/index.md` を更新（フェーズ3で作成した全summary・concept・entityが登録されていることを確認）
+2. 各concept/entityページの `## ソース` 欄がrawファイルのbasename（拡張子なし）を参照していることを確認する
+3. 各フェーズで発行した tool call のラウンド数を集計する（P1〜P4それぞれ）
+4. `wiki/log.md` に追記：`## [YYYY-MM-DD] ingest | [ソースタイトル] | Nrounds (P1:N P2:0 P3:N P4:N)`
 
 ### 質問応答
 
@@ -181,6 +183,7 @@ LLM 内部で以下を一括決定する：
 2. 問題を検出し、種類に応じて以下を実施：
 
    **自動修正**（承認不要）:
+   - index.mdに未登録のページを登録する
    - 孤立ページへの相互参照追加
    - 欠けているYAMLフロントマターの補完
    - 欠けている相互参照の追加
@@ -199,7 +202,10 @@ LLM 内部で以下を一括決定する：
 
 - `raw/` のファイルは**絶対に変更しない**
 - wikiページには必ずYAMLフロントマターを付ける
-- 内部リンクは `[[ファイル名|表示名]]` 形式を使う。表示名はページの `# タイトル` と一致させる。バッククォートで囲まない
+- 内部リンクは `[[ファイル名|表示名]]` 形式を使う。ファイル名はslug（実ファイル名・拡張子なし）、表示名はページの `# タイトル` と一致させる
+  - concepts/entities: `[[rag|RAG（Retrieval-Augmented Generation）]]`
+  - summaries: `[[2026-04-18 LLM Wiki|LLM Wiki]]`
+- リンクをバッククォートで囲まない（コードとして扱われリンクが機能しなくなる）
 - ソースリンクは `[[ファイル名|表示名]]` を使う（ファイル移動を考慮しフォルダ名は含めない）
 - ファイル名（slug）の規約: concepts/entities は lowercase-hyphen（例: `claude-code-settings`）、summaries は YYYY-MM-DD-lowercase-hyphen（例: `2026-04-06-claude-code-settings`）
 - `log.md` はすべての操作後に必ず追記する
